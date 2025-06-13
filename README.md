@@ -52,9 +52,9 @@ Version             |Process
 
 2.  **OpenSSH Server Installation Fails on Windows Server 2025**
 
--   Starting with Windows Server 2025, OpenSSH Server is **_[installed by default](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse?tabs=gui&pivots=windows-server-2025)_** and is no longer labelled as a preview feature. As a result, the **_firewall rules_** created during installation differ compared to other Windows OS:
+-   Starting with Windows Server 2025, OpenSSH Server is **_[installed by default](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse?tabs=gui&pivots=windows-server-2025)_** and is no longer labelled as a preview feature. As a result, the **_firewall rule_** created during installation differs compared to other Windows OS:
 
-OS                      |Firewall Rules
+OS                      |Firewall Rule
 :----------------------:|:--------------------------------
 **Other Windows OS**    |OpenSSH SSH Server Preview (sshd)
 **Windows Server 2025** |OpenSSH SSH Server (sshd)
