@@ -27,7 +27,7 @@ An **_automated operating system_** (**_OS_**) **_deployment solution_** utilizi
 
 1.  **Windows 11 Unattended Installation Fails on Version 24H2**
 
--   Windows 11 24H2 uses a **_[new setup process](https://www.elevenforum.com/t/w11-24h2-and-old-installation-setup.25706/post-476942)_**:
+-   Windows 11 24H2 uses a **_[new setup process](https://www.elevenforum.com/t/w11-24h2-and-old-installation-setup.25706/post-476855)_**:
 
 Version             |Process
 :------------------:|:-------------------------
