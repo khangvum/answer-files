@@ -8,3 +8,17 @@ An **_automated operating system_** (**_OS_**) **_deployment solution_** utilizi
 -   **_OpenSSH Server_** pre-installed to streamline **_post-deployment configuration_** (_e.g.,_ [khangvum/windows-config](https://github.com/khangvum/windows-config)).
 -   **_VMware Tools_** installed on supported **_virtual machines_** (**_VMs_**).
 -   **_Remote Desktop Services_** (formerly **_Terminal Services_**) enabled.
+
+## Filesystem Hierarchy
+
+```
+├── sources
+│   └── $oem$
+│       └── $$
+│           └── Setup
+│               └── Scripts
+│                   ├── OpenSSH-Server-x64.bat
+│                   ├── OpenSSH-Server-x64.msi
+│                   └── VMware-Tools-x64.exe
+└── autounattend.xml
+```
