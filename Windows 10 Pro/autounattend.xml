@@ -21,7 +21,7 @@
                         <CreatePartition wcm:action="add">
                             <Order>1</Order>
                             <Type>Primary</Type>
-                            <Size>300</Size>
+                            <Size>1024</Size>
                         </CreatePartition>
                         <!-- System (ESP) -->
                         <CreatePartition wcm:action="add">
