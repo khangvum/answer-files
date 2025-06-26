@@ -57,7 +57,7 @@ autoinstall:
         match:
           name: "en*"
         dhcp4: true
-      eth1:
+      eth0:
         match:
           name: "eth*"
         dhcp4: true
