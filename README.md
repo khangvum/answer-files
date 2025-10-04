@@ -38,14 +38,14 @@ An **_automated operating system_** (**_OS_**) **_deployment solution_** utilizi
 
 ## Troubleshooting
 
-1.  **Windows 11 Unattended Installation Fails on Version 24H2**
+1.  **Windows 11 Unattended Installation Fails on Version 24H2 and later**
 
--   Windows 11 24H2 uses a **_[new setup process](https://www.elevenforum.com/t/w11-24h2-and-old-installation-setup.25706/post-476855)_**:
+-   Windows 11 24H2 and later use a **_[new setup process](https://www.elevenforum.com/t/w11-24h2-and-old-installation-setup.25706/post-476855)_**:
 
-Version             |Process
-:------------------:|:-------------------------
-**23H2 and earlier**|`X:\setup.exe` is invoked.
-**24H2**            |`X:\Sources\setup.exe` is executed, which runs `SetupHost.exe`, which in turn invokes `SetupPrep.exe`.
+    Version             |Process
+    :------------------:|:-------------------------
+    **23H2 and earlier**|`X:\setup.exe` is invoked.
+    **24H2 and later**  |`X:\Sources\setup.exe` is executed, which runs `SetupHost.exe`, which in turn invokes `SetupPrep.exe`.
 
 -   The solution is to **_[explicitly invoke the legacy setup process](https://www.elevenforum.com/t/w11-24h2-and-old-installation-setup.25706/post-476942)_**:
 
@@ -67,9 +67,9 @@ Version             |Process
 
 -   Starting with Windows Server 2025, OpenSSH Server is **_[installed by default](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse?tabs=gui&pivots=windows-server-2025)_** and is no longer labelled as a preview feature. As a result, the **_firewall rule_** created during installation differs compared to other Windows OS:
 
-OS                      |Firewall Rule
-:----------------------:|:--------------------------------
-**Other Windows OS**    |OpenSSH SSH Server Preview (sshd)
-**Windows Server 2025** |OpenSSH SSH Server (sshd)
+    OS                      |Firewall Rule
+    :----------------------:|:--------------------------------
+    **Other Windows OS**    |OpenSSH SSH Server Preview (sshd)
+    **Windows Server 2025** |OpenSSH SSH Server (sshd)
 
 -   Update the [OpenSSH-Server-x64.bat](Windows%20Server%202025%20Standard/sources/$oem$/$$/Setup/Scripts/OpenSSH-Server-x64.bat) batch script for Windows Server 2025 to reflect the **_new firewall rule name_**.
