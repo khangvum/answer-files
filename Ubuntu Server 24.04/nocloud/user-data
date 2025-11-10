@@ -53,14 +53,18 @@ autoinstall:
   network:
     version: 2
     ethernets:
-      ens33:
-        match:
-          name: "en*"
-        dhcp4: true
       eth0:
         match:
-          name: "eth*"
+          name: "eth0"
         dhcp4: true
+        optional: true
+      eth1:
+        match:
+          name: "eth1"
+        dhcp4: false
+        addresses:
+          - 192.168.0.119/24
+        optional: true
   snaps:
   - name: powershell
     channel: stable
