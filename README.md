@@ -9,6 +9,16 @@ An **_automated operating system_** (**_OS_**) **_deployment solution_** utilizi
 -   **_VMware Tools_** installed on supported **_virtual machines_** (**_VMs_**).
 -   **_Remote Desktop Services_** (formerly **_Terminal Services_**) enabled.
 
+## Outline
+
+-   [Windows 10 Pro](Windows%2010%20Pro/autounattend.xml)
+-  **Windows 11 Pro:**
+    +   [Bypass Requirements](Windows%2011%20Pro/Bypass%20Requirements/autounattend.xml)
+    +   [Standard](Windows%2011%20Pro/Standard/autounattend.xml)
+-   [Windows Server 2019 Standard](Windows%20Server%202019%20Standard/autounattend.xml)
+-   [Windows Server 2022 Standard](Windows%20Server%202022%20Standard/autounattend.xml)
+-   [Windows Server 2025 Standard](Windows%20Server%202025%20Standard/autounattend.xml)
+
 ## Filesystem Hierarchy
 
 ### Ubuntu
