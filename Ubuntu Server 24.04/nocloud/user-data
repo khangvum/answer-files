@@ -61,9 +61,7 @@ autoinstall:
       eth1:
         match:
           name: "eth1"
-        dhcp4: false
-        addresses:
-          - 192.168.0.119/24
+        dhcp4: true
         optional: true
   snaps:
   - name: powershell
