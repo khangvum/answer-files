@@ -76,3 +76,5 @@ autoinstall:
     install-server: true
   updates: security
   timezone: America/Toronto
+  late-commands:
+    - curtin in-target -- bash -c "mv /etc/netplan/*.yaml /etc/netplan/00-installer-config.yaml"
