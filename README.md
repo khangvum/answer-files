@@ -13,7 +13,7 @@ An **_automated operating system_** (**_OS_**) **_deployment solution_** utilizi
 
 -   [Ubuntu Server 24.04](Ubuntu%20Server%2024.04/nocloud/user-data)
 -   [Windows 10 Pro](Windows%2010%20Pro/autounattend.xml)
--  **Windows 11 Pro:**
+-  Windows 11 Pro:
     +   [Bypass Requirements](Windows%2011%20Pro/Bypass%20Requirements/autounattend.xml)
     +   [Standard](Windows%2011%20Pro/Standard/autounattend.xml)
 -   [Windows Server 2019 Standard](Windows%20Server%202019%20Standard/autounattend.xml)
