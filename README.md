@@ -6,21 +6,22 @@ An **_automated operating system_** (**_OS_**) **_deployment solution_** utilizi
 
 ## Features
 
--   **_Unattended installation_** for **_UEFI-based_** systems running **_Ubuntu Server 24.04_**, **_Windows 10_**, **_Windows 11_**, **_Windows Server 2019_**, **_Windows Server 2022_**, and **_Windows Server 2025_**.
--   **_OpenSSH Server_** pre-installed to streamline **_post-deployment configuration_** (_e.g.,_ [khangvum/homelab-ansible-config](https://github.com/khangvum/homelab-ansible-config)).
--   **_VMware Tools_** installed on supported **_virtual machines_** (**_VMs_**).
--   **_Remote Desktop Services_** (formerly **_Terminal Services_**) enabled.
+- **_Unattended installation_** for **_UEFI-based_** systems running **_Ubuntu Server 24.04_**, **_Ubuntu Server 26.04_**, **_Windows 10_**, **_Windows 11_**, **_Windows Server 2019_**, **_Windows Server 2022_**, and **_Windows Server 2025_**.
+- **_OpenSSH Server_** pre-installed to streamline **_post-deployment configuration_** (_e.g.,_ [khangvum/homelab-ansible-config](https://github.com/khangvum/homelab-ansible-config)).
+- **_VMware Tools_** installed on supported **_virtual machines_** (**_VMs_**).
+- **_Remote Desktop Services_** (formerly **_Terminal Services_**) enabled.
 
 ## Outline
 
--   [Ubuntu Server 24.04](Ubuntu%20Server%2024.04/nocloud/user-data)
--   [Windows 10 Pro](Windows%2010%20Pro/autounattend.xml)
--  Windows 11 Pro:
-    +   [Bypass Requirements](Windows%2011%20Pro/Bypass%20Requirements/autounattend.xml)
-    +   [Standard](Windows%2011%20Pro/Standard/autounattend.xml)
--   [Windows Server 2019 Standard](Windows%20Server%202019%20Standard/autounattend.xml)
--   [Windows Server 2022 Standard](Windows%20Server%202022%20Standard/autounattend.xml)
--   [Windows Server 2025 Standard](Windows%20Server%202025%20Standard/autounattend.xml)
+- [Ubuntu Server 24.04](Ubuntu%20Server%2024.04/nocloud/user-data)
+- [Ubuntu Server 26.04](Ubuntu%20Server%2026.04/nocloud/user-data)
+- [Windows 10 Pro](Windows%2010%20Pro/autounattend.xml)
+- Windows 11 Pro:
+  - [Bypass Requirements](Windows%2011%20Pro/Bypass%20Requirements/autounattend.xml)
+  - [Standard](Windows%2011%20Pro/Standard/autounattend.xml)
+- [Windows Server 2019 Standard](Windows%20Server%202019%20Standard/autounattend.xml)
+- [Windows Server 2022 Standard](Windows%20Server%202022%20Standard/autounattend.xml)
+- [Windows Server 2025 Standard](Windows%20Server%202025%20Standard/autounattend.xml)
 
 ## Filesystem Hierarchy
 
@@ -53,36 +54,36 @@ An **_automated operating system_** (**_OS_**) **_deployment solution_** utilizi
 
 1.  **Windows 11 Unattended Installation Fails on Version 24H2 and Later**
 
--   Windows 11 24H2 and later use a **_[new setup process](https://www.elevenforum.com/t/w11-24h2-and-old-installation-setup.25706/post-476855)_**:
+- Windows 11 24H2 and later use a **_[new setup process](https://www.elevenforum.com/t/w11-24h2-and-old-installation-setup.25706/post-476855)_**:
 
-    Version             |Process
-    :------------------:|:-------------------------
-    **23H2 and earlier**|`X:\setup.exe` is invoked.
-    **24H2 and later**  |`X:\Sources\setup.exe` is executed, which runs `SetupHost.exe`, which in turn invokes `SetupPrep.exe`.
+  |       Version        | Process                                                                                                |
+  | :------------------: | :----------------------------------------------------------------------------------------------------- |
+  | **23H2 and earlier** | `X:\setup.exe` is invoked.                                                                             |
+  |  **24H2 and later**  | `X:\Sources\setup.exe` is executed, which runs `SetupHost.exe`, which in turn invokes `SetupPrep.exe`. |
 
--   The solution is to **_[explicitly invoke the legacy setup process](https://www.elevenforum.com/t/w11-24h2-and-old-installation-setup.25706/post-476942)_**:
+- The solution is to **_[explicitly invoke the legacy setup process](https://www.elevenforum.com/t/w11-24h2-and-old-installation-setup.25706/post-476942)_**:
 
-    ```xml
-    <settings pass="windowsPE">
-        <component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <RunSynchronous>
-                <RunSynchronousCommand wcm:action="add">
-                    <Description>Switch to Legacy Setup</Description>
-                    <Order>1</Order>
-                    <Path>reg add "HKEY_LOCAL_MACHINE\SYSTEM\Setup" /v CmdLine /t REG_SZ /d "X:\sources\setup.exe" /f</Path>
-                </RunSynchronousCommand>
-            </RunSynchronous>
-        </component>
-    </settings>
-    ```
+  ```xml
+  <settings pass="windowsPE">
+      <component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <RunSynchronous>
+              <RunSynchronousCommand wcm:action="add">
+                  <Description>Switch to Legacy Setup</Description>
+                  <Order>1</Order>
+                  <Path>reg add "HKEY_LOCAL_MACHINE\SYSTEM\Setup" /v CmdLine /t REG_SZ /d "X:\sources\setup.exe" /f</Path>
+              </RunSynchronousCommand>
+          </RunSynchronous>
+      </component>
+  </settings>
+  ```
 
 2.  **OpenSSH Server Installation Fails on Windows Server 2025**
 
--   Starting with Windows Server 2025, OpenSSH Server is **_[installed by default](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse?tabs=gui&pivots=windows-server-2025)_** and is no longer labelled as a preview feature. As a result, the **_firewall rule_** created during installation differs compared to other Windows OS:
+- Starting with Windows Server 2025, OpenSSH Server is **_[installed by default](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse?tabs=gui&pivots=windows-server-2025)_** and is no longer labelled as a preview feature. As a result, the **_firewall rule_** created during installation differs compared to other Windows OS:
 
-    OS                      |Firewall Rule
-    :----------------------:|:--------------------------------
-    **Other Windows OS**    |OpenSSH SSH Server Preview (sshd)
-    **Windows Server 2025** |OpenSSH SSH Server (sshd)
+  |           OS            | Firewall Rule                     |
+  | :---------------------: | :-------------------------------- |
+  |  **Other Windows OS**   | OpenSSH SSH Server Preview (sshd) |
+  | **Windows Server 2025** | OpenSSH SSH Server (sshd)         |
 
--   Update the [OpenSSH-Server-x64.bat](Windows%20Server%202025%20Standard/sources/$oem$/$$/Setup/Scripts/OpenSSH-Server-x64.bat) batch script for Windows Server 2025 to reflect the **_new firewall rule name_**.
+- Update the [OpenSSH-Server-x64.bat](Windows%20Server%202025%20Standard/sources/$oem$/$$/Setup/Scripts/OpenSSH-Server-x64.bat) batch script for Windows Server 2025 to reflect the **_new firewall rule name_**.

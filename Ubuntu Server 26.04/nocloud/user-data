@@ -1,0 +1,82 @@
+#cloud-config
+autoinstall:
+  version: 1
+  refresh-installer:
+    update: true
+    channel: stable
+  apt:
+    disable_components: []
+    fallback: abort
+    geoip: false
+    mirror-selection:
+      primary:
+        - country-mirror
+        - arches: &id001
+            - amd64
+            - i386
+          uri: http://archive.ubuntu.com/ubuntu/
+        - arches: &id002
+            - arm64
+          uri: http://ports.ubuntu.com/ubuntu-ports
+    preserve_sources_list: false
+    security:
+      - arches: *id001
+        uri: http://security.ubuntu.com/ubuntu/
+      - arches: *id002
+        uri: http://ports.ubuntu.com/ubuntu-ports
+  packages:
+    - git
+    - curl
+    - wget
+    - vim
+    - open-vm-tools
+  drivers:
+    install: true
+  storage:
+    layout:
+      name: lvm
+      sizing-policy: all
+  user-data:
+    disable_root: false
+  identity:
+    realname: ""
+    hostname: ubuntu-2604
+    username: administrator
+    password: $6$KC06qonQxY3Od/ak$Dqrc11oE/kRJXr8M3LX5H6Lo69fhKhBd8ujbiA5Qgn7TurWpzSl22ZL88P2dR1XkM7rdMUqs0n1/t9uoObN4F0
+  kernel:
+    package: linux-generic
+  keyboard:
+    layout: us
+    toggle: null
+    variant: ""
+  locale: en_US.UTF-8
+  network:
+    version: 2
+    ethernets:
+      eth0:
+        match:
+          name: "eth0"
+        dhcp4: true
+        optional: true
+      eth1:
+        match:
+          name: "eth1"
+        dhcp4: true
+        optional: true
+  snaps:
+    - name: powershell
+      channel: stable
+      classic: true
+  source:
+    id: ubuntu-server
+    search_drivers: true
+  ssh:
+    allow-pw: true
+    authorized-keys: []
+    install-server: true
+  updates: security
+  timezone: America/Toronto
+  late-commands:
+    - curtin in-target -- bash -c "mv /etc/netplan/*.yaml /etc/netplan/00-installer-config.yaml"
+    - curtin in-target -- bash -c "echo 'administrator ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/90-administrator && chmod 440 /etc/sudoers.d/90-administrator"
+    - curtin in-target -- visudo -cf /etc/sudoers.d/90-administrator
