@@ -7,7 +7,7 @@ An **_automated operating system_** (**_OS_**) **_deployment solution_** utilizi
 ## Features
 
 - **_Unattended installation_** for **_UEFI-based_** systems running **_Ubuntu Server 24.04_**, **_Ubuntu Server 26.04_**, **_Windows 10_**, **_Windows 11_**, **_Windows Server 2019_**, **_Windows Server 2022_**, and **_Windows Server 2025_**.
-- **_OpenSSH Server_** pre-installed to streamline **_post-deployment configuration_** (_e.g.,_ [khangvum/homelab-ansible-config](https://github.com/khangvum/homelab-ansible-config)).
+- **_OpenSSH Server_** pre-installed to streamline **_post-deployment configuration_** (_e.g.,_ [khangvum/ansible-config](https://github.com/khangvum-com/ansible-config)).
 - **_VMware Tools_** installed on supported **_virtual machines_** (**_VMs_**).
 - **_Remote Desktop Services_** (formerly **_Terminal Services_**) enabled.
 
