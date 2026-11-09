@@ -7,7 +7,7 @@ An **_automated operating system_** (**_OS_**) **_deployment solution_** utilizi
 ## Features
 
 - **_Unattended installation_** for **_UEFI-based_** systems running **_Ubuntu Server 24.04_**, **_Ubuntu Server 26.04_**, **_Windows 10_**, **_Windows 11_**, **_Windows Server 2019_**, **_Windows Server 2022_**, and **_Windows Server 2025_**.
-- **_OpenSSH Server_** pre-installed to streamline **_post-deployment configuration_** (_e.g.,_ [khangvum/homelab-ansible-config](https://github.com/khangvum/homelab-ansible-config)).
+- **_OpenSSH Server_** pre-installed to streamline **_post-deployment configuration_** (_e.g.,_ [khangvum/ansible-config](https://github.com/khangvum-com/ansible-config)).
 - **_VMware Tools_** installed on supported **_virtual machines_** (**_VMs_**).
 - **_Remote Desktop Services_** (formerly **_Terminal Services_**) enabled.
 
@@ -87,3 +87,14 @@ An **_automated operating system_** (**_OS_**) **_deployment solution_** utilizi
   | **Windows Server 2025** | OpenSSH SSH Server (sshd)         |
 
 - Update the [OpenSSH-Server-x64.bat](Windows%20Server%202025%20Standard/sources/$oem$/$$/Setup/Scripts/OpenSSH-Server-x64.bat) batch script for Windows Server 2025 to reflect the **_new firewall rule name_**.
+
+3.  **Administrator User Cannot Use `usdo` on Ubuntu Server 26.04**
+
+- Starting with Ubuntu Server 26.04, **_usdo_** replaces **_sudo_**. As a result, the **_administrator user_** cannot use **_usdo_** normally without a **_sudoers configuration_**.
+
+- The solution is to add the **_administrator user_** to the **_sudoers configuration_** and validate the file:
+
+  ```yaml
+  - curtin in-target -- bash -c "echo 'administrator ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/90-administrator && chmod 440 /etc/sudoers.d/90-administrator"
+  - curtin in-target -- visudo -cf /etc/sudoers.d/90-administrator
+  ```
